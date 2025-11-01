@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, admin } from "./_lib/firebaseAdmin";
-import { buildIndicatorSnapshot } from "./_lib/indicators";
-import { evaluateConditions } from "./_lib/strategies";
-import type { CandlePayload, StrategyPayload, StrategyCondition, LogicGate } from "./_lib/types";
+import { getFirestore, admin } from "../lib/firebaseAdmin";
+import { buildIndicatorSnapshot } from "../lib/indicators";
+import { evaluateConditions } from "../lib/strategies";
+import type { CandlePayload, StrategyPayload, StrategyCondition, LogicGate } from "../lib/types";
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -125,7 +125,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error("Erro em /api/candles", error);
-    return res.status(500).json({
+    return res.status(400).json({
       error: error instanceof Error ? error.message : "Erro ao processar candle",
     });
   }
