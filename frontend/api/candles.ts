@@ -125,7 +125,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error("Erro em /api/candles", error);
-    return res.status(400).json({
+    return res.status(500).json({
       error: error instanceof Error ? error.message : "Erro ao processar candle",
     });
   }
