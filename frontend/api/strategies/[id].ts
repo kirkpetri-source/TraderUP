@@ -29,7 +29,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === "PATCH") {
     try {
-      const payload = req.body as Partial<StrategyPayload> & { isActive?: boolean };
+      const rawBody = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      const payload = rawBody as Partial<StrategyPayload> & { isActive?: boolean };
       await docRef.set(
         {
           ...payload,

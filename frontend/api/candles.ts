@@ -57,7 +57,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const candle = validatePayload(req.body);
+    const rawBody = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+    const candle = validatePayload(rawBody);
     const doc = {
       ...candle,
       symbol: candle.symbol.toUpperCase(),

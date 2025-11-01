@@ -39,7 +39,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method === "POST") {
     try {
-      const payload = req.body as StrategyPayload;
+      const rawBody = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      const payload = rawBody as StrategyPayload;
       if (!payload?.name || !payload?.conditions || !payload.symbols?.length) {
         return res.status(400).json({ error: "Payload inválido" });
       }
