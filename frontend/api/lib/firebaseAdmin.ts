@@ -1,4 +1,5 @@
 import * as admin from "firebase-admin";
+import "firebase-admin/firestore";
 
 let app: admin.app.App | null = null;
 
