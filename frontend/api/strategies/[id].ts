@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, getAuth, admin } from "../lib/firebaseAdmin.js";
+import { getFirestore, getAuth, FirestoreFieldValue } from "../lib/firebaseAdmin.js";
 import type { StrategyPayload } from "../lib/types.js";
 
 async function resolveUserId(req: VercelRequest): Promise<string | null> {
@@ -34,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       await docRef.set(
         {
           ...payload,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          updatedAt: FirestoreFieldValue.serverTimestamp(),
         },
         { merge: true },
       );

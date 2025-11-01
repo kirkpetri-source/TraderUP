@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, getAuth, admin } from "./lib/firebaseAdmin.js";
+import { getFirestore, getAuth, FirestoreFieldValue } from "./lib/firebaseAdmin.js";
 import type { StrategyPayload } from "./lib/types.js";
 
 async function resolveUserId(req: VercelRequest): Promise<string | null> {
@@ -44,7 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (!payload?.name || !payload?.conditions || !payload.symbols?.length) {
         return res.status(400).json({ error: "Payload inválido" });
       }
-      const now = admin.firestore.FieldValue.serverTimestamp();
+      const now = FirestoreFieldValue.serverTimestamp();
       const userId = (await resolveUserId(req)) ?? "anonymous";
       const ref = await firestore.collection("strategies").add({
         ...payload,

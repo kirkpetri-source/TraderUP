@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, admin } from "./lib/firebaseAdmin.js";
+import { getFirestore, FirestoreFieldValue } from "./lib/firebaseAdmin.js";
 import { buildIndicatorSnapshot } from "./lib/indicators.js";
 import { evaluateConditions } from "./lib/strategies.js";
 import type { CandlePayload, StrategyPayload, StrategyCondition, LogicGate } from "./lib/types.js";
@@ -63,7 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ...candle,
       symbol: candle.symbol.toUpperCase(),
       timeframe: candle.timeframe.toUpperCase(),
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: FirestoreFieldValue.serverTimestamp(),
     };
 
     const collection = candleCollection(candle.symbol, candle.timeframe);
@@ -110,7 +110,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         timeframe: candle.timeframe.toUpperCase(),
         price: candle.close,
         indicatorSnapshot,
-        triggeredAt: admin.firestore.FieldValue.serverTimestamp(),
+        triggeredAt: FirestoreFieldValue.serverTimestamp(),
       });
       const message = `🚨 Estratégia *${data.name}* (${candle.symbol}/${candle.timeframe}) disparou a ${candle.close.toFixed(
         5,

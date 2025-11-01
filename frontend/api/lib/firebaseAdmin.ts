@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
-import "firebase-admin/firestore";
+import { FieldValue, getFirestore as getFirestoreModule } from "firebase-admin/firestore";
 
 let app: admin.app.App | null = null;
 
@@ -42,7 +42,8 @@ export function getAdminApp(): admin.app.App {
 }
 
 export function getFirestore() {
-  return getAdminApp().firestore();
+  getAdminApp();
+  return getFirestoreModule();
 }
 
 export function getAuth() {
@@ -50,3 +51,4 @@ export function getAuth() {
 }
 
 export { admin };
+export const FirestoreFieldValue = FieldValue;
