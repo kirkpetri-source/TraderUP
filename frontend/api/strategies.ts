@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, getAuth, admin } from "./lib/firebaseAdmin";
-import type { StrategyPayload } from "./lib/types";
+import { getFirestore, getAuth, admin } from "./lib/firebaseAdmin.js";
+import type { StrategyPayload } from "./lib/types.js";
 
 async function resolveUserId(req: VercelRequest): Promise<string | null> {
   const authHeader = req.headers.authorization;

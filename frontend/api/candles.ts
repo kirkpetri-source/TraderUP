@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { getFirestore, admin } from "./lib/firebaseAdmin";
-import { buildIndicatorSnapshot } from "./lib/indicators";
-import { evaluateConditions } from "./lib/strategies";
-import type { CandlePayload, StrategyPayload, StrategyCondition, LogicGate } from "./lib/types";
+import { getFirestore, admin } from "./lib/firebaseAdmin.js";
+import { buildIndicatorSnapshot } from "./lib/indicators.js";
+import { evaluateConditions } from "./lib/strategies.js";
+import type { CandlePayload, StrategyPayload, StrategyCondition, LogicGate } from "./lib/types.js";
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
